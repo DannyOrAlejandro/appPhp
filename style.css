@@ -1,0 +1,27 @@
+*{color: white;
+font-weight: bold;
+text-shadow: 0px 0px 10px black;
+}
+#imgame,.datos{display: flex;margin: auto;display: inline-block;}
+#image{
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px black;
+}
+hr{
+    background-color: white;
+    height: 0.8em;
+}
+body{
+background: url("https://ep01.epimg.net/elpais/imagenes/2019/10/30/album/1572424649_614672_1572453030_noticia_normal.jpg") no-repeat center center fixed;
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
+}
+form{
+    margin: 100px;
+}
+header{
+    text-align: center;
+}
+
