@@ -4,7 +4,7 @@
 //mysqli_connetc("nombre_del_server","nombre_de_usuario","contraseña";"nombre_base_de_datos");
 $ID=$_SESSION['IDuser'];
 if (empty($_SESSION['active'])){header('location:index.php');}
-$conex=mysqli_connect("localhost","danny","dgstar","danny");
+$conex=mysqli_connect('localhost','root','','danny');
 if (!$conex) {
     //si no se pudo hacer la coneccion nos manda este mensaje con el error
     echo "No Ha Sido Posible La Conexion Con El Servidor".mysqli_error($conex);
@@ -31,7 +31,7 @@ if (!$conex) {
             <?php if ($tipoImg!=NULL && $tipoImg!='NULL' && $tipoImg!='') {
                 include('leerImg.php');
             }else{ ?>
-                <img src="<?php echo $perfil_img ?>" alt="Girl of anime" class="card-img-top">
+                <img src="<?php echo $perfil_img ?>" alt="IMAGEN" class="card-img-top">
             <?php } ?>
                 <div class="card-body">
                     <div class="card-text">

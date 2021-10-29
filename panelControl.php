@@ -7,7 +7,7 @@ session_start();
 $ID=$_SESSION['IDuser'];
 if (empty($_SESSION['active'])) {header('location:index.php');}
 $alert='';
-$conex=mysqli_connect('localhost','danny','dgstar','danny');  //creamos conexion
+$conex=mysqli_connect('localhost','root','','danny');  //creamos conexion
 if (isset($_REQUEST['file'])) {  //isset($_REQUEST['file']) ES SI SE PULSO EL BOTON CON EL NOMBRE file
     if (isset($_FILES['img']['name'])) {
         //para no tener problemas debo de validar el tipo de archivo que es para evitar posibles hackeosno lo hare porque
@@ -78,9 +78,14 @@ include('functions.php');
     <title>USERS OF DB</title>
 </head>
 <body>
-    <header style="color:white;">
-        <a href="cerrarSesion.php"><img style="display:inline-block;float:right;" id="cerrarSesion" src="http://icons555.com/images/icons-gray/image_icon_logout_pic_512x512.png" alt=""></a>
-        <p class="fecha">Colombia, Bogota, <?php echo fecha() ?></p>
+    <header style="color:white;"><i class="bi bi-power"></i>
+        <a href="cerrarSesion.php">
+         <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="white" class="bi bi-power" viewBox="0 0 16 16"  style="display:inline-block;float:right;filter: drop-shadow(0 2px 5px white);">
+            <path d="M7.5 1v7h1V1h-1z"/>
+            <path d="M3 8.812a4.999 4.999 0 0 1 2.578-4.375l-.485-.874A6 6 0 1 0 11 3.616l-.501.865A5 5 0 1 1 3 8.812z"/>
+         </svg>
+        </a>
+        <p class="fecha">Colombia, Medellin, <?php echo fecha() ?></p>
         <p class="fecha" style="padding-left:200px;">BIENVENIDO <?php echo $_SESSION['user']; ?></p>
     </header>
     <div class="forms" style="margin: 100px;">

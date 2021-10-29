@@ -9,7 +9,6 @@ label{
     font-weight: bold;
 }
 header{padding: 10px; width: 100%;position: static;}
-#cerrarSesion{height: 50px;}
 .card{display: flex;margin: auto;display: inline-block;}
 .fecha{
     display:inline-block;

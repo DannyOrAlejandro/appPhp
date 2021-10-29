@@ -23,10 +23,10 @@ if (!empty($_SESSION['active'])) {
         }else {
             //si no estan vacios nos conectamos al base datos
             //mysqli_connetc("nombre_del_server","nombre_de_usuario","contraseña";"nombre_base_de_datos");
-            $conex=mysqli_connect('localhost','danny','dgstar','danny');
+            $conex=mysqli_connect('localhost','root','','danny');
             if (!$conex) {
                 //si sucede algun error en la coneccion
-                $alert= "Error en la coneccion con la base de datos";
+                $alert= "Error en la conexion con la base de datos";
             }else{
                 //si se conecta de forma correcta guardamos los valores que el usuario ingreso
                 //encriptemos las contraseñas con md5 y las escapamos la contraseña y el usuario para evitar inyecciones sql
@@ -78,15 +78,14 @@ if (!empty($_SESSION['active'])) {
 </head>
 <body>
     <header>
-        <h1>INICIO DE SESION DE DANNY</h1>
-        <h2>Validacion e Inicion de Secion</h2>
+        <h1>INICIO DE SESION, PROTYECTO PIA</h1>
+        <h2>Validacion e Inicion de Seccion</h2>
     </header>
     <!--si dejo action vacio ejecutara este mismo archivo-->
     <form action="" method="post">
     <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">Nombre de usuario</label>
         <input type="text" class="form-control" id="exampleInputEmail1" name="usuario" aria-describedby="emailHelp">
-        <div id="emailHelp" class="form-text">NO SE DISTINGUEN ENTRE MAYUSCULAS Y MINUSCULAS</div>
     </div>
     <div class="mb-3">
         <label for="exampleInputPassword1" class="form-label">Contraseña</label>

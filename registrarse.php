@@ -3,11 +3,11 @@
 if(!empty($_POST) && isset($_REQUEST['link'])){
     $alert='';
     //validoamos que todos los campos esten llenos
-    if (empty($_POST['usuario']) | empty($_POST['clave'])) {
-        $alert='Todos los campos son obligatirios';
+    if (empty($_POST['usuario']) | empty($_POST['clave'])  | empty($_POST['email']) | empty($_POST['image'])) {
+        $alert='Todos los campos son obligatirios, Sube una imagen o Copia y pega el link de una imagen';
     }else{//si todos los campos esta llenos iniciamos procesio de registro
         //hacemos la coneccion con el server, puedo crear un archivo de conexion.php
-        $conex=mysqli_connect('localhost','danny','dgstar','danny');
+        $conex=mysqli_connect('localhost','root','','danny');
      
         
         //validamos que se halla hecho la conexion de forma correcta
@@ -47,13 +47,14 @@ if(!empty($_POST) && isset($_REQUEST['link'])){
             
         }
     }
-}elseif(isset($_REQUEST['file']) && !empty($_POST)) {  //isset($_REQUEST['file']) ES SI SE PULSO EL BOTON CON EL NOMBRE file
+}
+if(isset($_REQUEST['file']) && !empty($_POST)) {  //isset($_REQUEST['file']) ES SI SE PULSO EL BOTON CON EL NOMBRE file
     $alert='';
-    if (empty($_POST['usuario']) | empty($_POST['clave'])) {
-        $alert='Todos los campos son obligatirios';
+    if (empty($_POST['usuario']) | empty($_POST['clave']) | empty($_POST['email']) | !isset($_FILES['img']['name']) ) {
+        $alert='Todos los campos son obligatirios, Sube una imagen o Copia y pega el link de una imagen';
     }else{//si todos los campos esta llenos iniciamos procesio de registro
         //hacemos la coneccion con el server, puedo crear un archivo de conexion.php
-        $conex=mysqli_connect('localhost','danny','dgstar','danny');
+        $conex=mysqli_connect('localhost','root','','danny');
         //validamos que se halla hecho la conexion de forma correcta
         if (!$conex) {
             $alert='Error en la conexion con el servidor';
@@ -123,8 +124,8 @@ if(!empty($_POST) && isset($_REQUEST['link'])){
 </head>
 <body>
     <header>
-        <h1>registrarse en el sitema de DANNY</h1>
-        <h2>Validacion y registro en la Base de datos de danny</h2>
+        <h1>registrarse en el sitema</h1>
+        <h2>Validacion y registro</h2>
     </header>
     <!--si dejo action vacio ejecutara este mismo archivo usamos enctype='multipart/form-data' para poder enviar la imagen 
     a la base de datos-->
@@ -132,7 +133,6 @@ if(!empty($_POST) && isset($_REQUEST['link'])){
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Nombre de usuario</label>
             <input type="text" class="form-control" id="exampleInputEmail1" name="usuario" aria-describedby="emailHelp">
-            <div id="emailHelp" class="form-text">NO SE DISTINGUEN ENTRE MAYUSCULAS Y MINUSCULAS</div>
         </div>
         <div class="mb-3" id="perfilImg">
             <label for="email" class="form-label">Correo Electronico</label>
