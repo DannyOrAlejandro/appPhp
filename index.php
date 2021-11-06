@@ -23,7 +23,7 @@ if (!empty($_SESSION['active'])) {
         }else {
             //si no estan vacios nos conectamos al base datos
             //mysqli_connetc("nombre_del_server","nombre_de_usuario","contraseña";"nombre_base_de_datos");
-            $conex=mysqli_connect('localhost','root','','appphp');
+            $conex=mysqli_connect('bjokk9p64b3uajxl6sg9-mysql.services.clever-cloud.com','uzukxkzcotihhxn5','gIyVoHkRyLUmdrzzQ3st','bjokk9p64b3uajxl6sg9');
             if (!$conex) {
                 //si sucede algun error en la coneccion
                 $alert= "Error en la conexion con la base de datos";

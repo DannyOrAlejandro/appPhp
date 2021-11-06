@@ -4,7 +4,7 @@
 //mysqli_connetc("nombre_del_server","nombre_de_usuario","contraseña";"nombre_base_de_datos");
 $ID=$_SESSION['IDuser'];
 if (empty($_SESSION['active'])){header('location:index.php');}
-$conex=mysqli_connect('localhost','root','','appphp');
+$conex=mysqli_connect('bjokk9p64b3uajxl6sg9-mysql.services.clever-cloud.com','uzukxkzcotihhxn5','gIyVoHkRyLUmdrzzQ3st','bjokk9p64b3uajxl6sg9');
 if (!$conex) {
     //si no se pudo hacer la coneccion nos manda este mensaje con el error
     echo "No Ha Sido Posible La Conexion Con El Servidor".mysqli_error($conex);

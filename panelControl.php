@@ -7,7 +7,7 @@ session_start();
 $ID=$_SESSION['IDuser'];
 if (empty($_SESSION['active'])) {header('location:index.php');}
 $alert='';
-$conex=mysqli_connect('localhost','root','','appphp');  //creamos conexion
+$conex=mysqli_connect('bjokk9p64b3uajxl6sg9-mysql.services.clever-cloud.com','uzukxkzcotihhxn5','gIyVoHkRyLUmdrzzQ3st','bjokk9p64b3uajxl6sg9');  //creamos conexion
 if(!$conex){
     echo 'Error en la conexion con la base de datos';
 }else{

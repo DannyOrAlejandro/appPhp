@@ -9,7 +9,7 @@ if(!empty($_POST)){
         $alert='Todos los campos son obligatirio';
     }else{//si todos los campos esta llenos iniciamos procesio de registro
         //hacemos la coneccion con el server, puedo crear un archivo de conexion.php
-        $conex=mysqli_connect('localhost','root','','appphp');
+        $conex=mysqli_connect('bjokk9p64b3uajxl6sg9-mysql.services.clever-cloud.com','uzukxkzcotihhxn5','gIyVoHkRyLUmdrzzQ3st','bjokk9p64b3uajxl6sg9');
         //validamos que se halla hecho la conexion de forma correcta
         if (!$conex) {
             $alert='Error en la conexion con el servidor';
@@ -53,7 +53,7 @@ if(!empty($_POST)){
         $alert='Todos los campos son obligatirios, Sube una imagen o Copia y pega el link de una imagen';
     }else{//si todos los campos esta llenos iniciamos procesio de registro
         //hacemos la coneccion con el server, puedo crear un archivo de conexion.php
-        $conex=mysqli_connect('localhost','root','','appphp');
+        $conex=mysqli_connect('bjokk9p64b3uajxl6sg9-mysql.services.clever-cloud.com','uzukxkzcotihhxn5','gIyVoHkRyLUmdrzzQ3st','bjokk9p64b3uajxl6sg9');
         //validamos que se halla hecho la conexion de forma correcta
         if (!$conex) {
             $alert='Error en la conexion con el servidor';
