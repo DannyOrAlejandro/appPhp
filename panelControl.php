@@ -7,8 +7,11 @@ session_start();
 $ID=$_SESSION['IDuser'];
 if (empty($_SESSION['active'])) {header('location:index.php');}
 $alert='';
-$conex=mysqli_connect('localhost','root','','danny');  //creamos conexion
-if (isset($_REQUEST['file'])) {  //isset($_REQUEST['file']) ES SI SE PULSO EL BOTON CON EL NOMBRE file
+$conex=mysqli_connect('localhost','root','','appphp');  //creamos conexion
+if(!$conex){
+    echo 'Error en la conexion con la base de datos';
+}else{
+/*if (isset($_REQUEST['file'])) {  //isset($_REQUEST['file']) ES SI SE PULSO EL BOTON CON EL NOMBRE file
     if (isset($_FILES['img']['name'])) {
         //para no tener problemas debo de validar el tipo de archivo que es para evitar posibles hackeosno lo hare porque
         //es mmi server locar pero se hace asi:
@@ -17,7 +20,7 @@ if (isset($_REQUEST['file'])) {  //isset($_REQUEST['file']) ES SI SE PULSO EL BO
         if(in_array($tipoArchivo,$permitidos)){ PARAMETRO 1 DE LA FUNCION IN_ARRAY EL VALOR QUE KEREMOS SABER SI ESTA EN EL ARRAY PARAMETRO 2 ARRAY EN EL QUE SE BUSCARA SI ESTA O NO EL PARAMETRO 1
             die("ARCHIVO NO PERMITIDO");   SI EL ARCHIVO NO ESTA PERMITIDO MATAMOS TODO PROSECO Y MANDAMOS UN MESAJE
         }
-        */
+        
         $nombreArchivo=$_FILES['img']['name']; //NOMBRE ARCHIVO
         $tamañoArchivo=$_FILES['img']['size']; //TAMAÑO DEL ARCHIVO
         $imagenSubida=fopen($_FILES['img']['tmp_name'],'r'); //LEEMOS EL ARCHIVO LA 'r' DE SEGUNDO PARAMETRO ES LECTIRA LEER $_FILES ES UNA VARIABLE MEGAGLOBAL DONDE SE GUARDAN LOS ARCHOS DE FORMA TEMPORAL EL PRIMER [NAME DEL CAMPO IMPUT EN EL FORMULARO] EL SEGUDNO [INDICA QUE SE GUARDARA DE FORMA TEMPORAL SIEMPO ES: 'tmp_name']
@@ -47,32 +50,45 @@ if (isset($_REQUEST['file'])) {  //isset($_REQUEST['file']) ES SI SE PULSO EL BO
         }
     }else {
         $alert='Error en la conexion con el servidor';
-    }   
-}elseif (isset($_REQUEST['save'])){
-    if (isset($_FILES['img']['name'])) {
-        $tipoArchivo=$_FILES['img']['type'];
-        $nombreArchivo=$_FILES['img']['name']; //NOMBRE ARCHIVO
-        $tamañoArchivo=$_FILES['img']['size']; //TAMAÑO DEL ARCHIVO
-        $imagenSubida=fopen($_FILES['img']['tmp_name'],'r'); //LEEMOS EL ARCHIVO LA 'r' DE SEGUNDO PARAMETRO ES LECTIRA LEER $_FILES ES UNA VARIABLE MEGAGLOBAL DONDE SE GUARDAN LOS ARCHOS DE FORMA TEMPORAL EL PRIMER [NAME DEL CAMPO IMPUT EN EL FORMULARO] EL SEGUDNO [INDICA QUE SE GUARDARA DE FORMA TEMPORAL SIEMPO ES: 'tmp_name']
-        $binariosImagen=fread($imagenSubida,$tamañoArchivo); //COMBERTIMOS LA IMAGEN A BINARIOS 
-        $binariosImagen=mysqli_escape_string($conex,$binariosImagen);
-        $consulta="INSERT INTO imgs(img,user_id,tipoDeImg) VALUES('$binariosImagen','$ID','$tipoArchivo')";
-        $saveImg=mysqli_query($conex,$consulta);
-        if ($saveImg) {
-            $alert='Imagen guardada con exito';
-        }else {
-            $alert='Error al guardar la imagen: '.mysqli_error($conex);
+    }
+}*/
+    if (isset($_REQUEST['save'])){
+        if (isset($_FILES['img']['name'])) {
+            $tipoArchivo=$_FILES['img']['type'];
+            $nombreArchivo=$_FILES['img']['name']; //NOMBRE ARCHIVO
+            $tamañoArchivo=$_FILES['img']['size']; //TAMAÑO DEL ARCHIVO
+            $imagenSubida=fopen($_FILES['img']['tmp_name'],'r'); //LEEMOS EL ARCHIVO LA 'r' DE SEGUNDO PARAMETRO ES LECTIRA LEER $_FILES ES UNA VARIABLE MEGAGLOBAL DONDE SE GUARDAN LOS ARCHOS DE FORMA TEMPORAL EL PRIMER [NAME DEL CAMPO IMPUT EN EL FORMULARO] EL SEGUDNO [INDICA QUE SE GUARDARA DE FORMA TEMPORAL SIEMPO ES: 'tmp_name']
+            $binariosImagen=fread($imagenSubida,$tamañoArchivo); //COMBERTIMOS LA IMAGEN A BINARIOS 
+            $binariosImagen=mysqli_escape_string($conex,$binariosImagen);
+            $consulta="INSERT INTO imgs(img,user_id,tipoDeImg) VALUES('$binariosImagen','$ID','$tipoArchivo')";
+            $saveImg=mysqli_query($conex,$consulta);
+            if ($saveImg) {
+                $alert='Imagen guardada con exito';
+            }else {
+                $alert='Error al guardar la imagen';
+            }
         }
     }
+    if(isset($_REQUEST['link'])){
+        $img=$_POST['image'];
+        $consulta="INSERT INTO imgs(img,user_id) VALUES('$img','$ID')";
+        $result=mysqli_query($conex,$consulta);
+        if ($result) {
+            $alert='Imagen guardada con exito';
+        }else{
+            $alert='Error al guardar la imagen';
+        }
+    } 
 }
 include('functions.php');
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="https://img.icons8.com/color/2x/pictures-folder.png" type="image/x-icon">
     <link rel="stylesheet" href="style2.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>USERS OF DB</title>
@@ -93,14 +109,13 @@ include('functions.php');
             <div style="">
                 <label for="exampleInputPassword1" class="form-label" style="font-size:20px;color:white;">Imagen de perfil(LINK)</label>
                 <input type="text" class="form-control" name="image" id="image" style="margin-right:100px;margin-bottom: 20px; width: 470px;" required>
-                <button type="submit" class="btn btn-primary" name="link">Actualizar Foto De Perfil</button>
+                <button type="submit" class="btn btn-primary" name="link">Guardar imagen</button>
             </div>
         </form>
         <form method="post" enctype='multipart/form-data' style="display:inline-block">
             <div>
                 <label for="exampleInputPassword1" style="font-size:20px;color:white;" class="form-label">Imagen de perfil(ARCHIVO)</label>
                 <input type="file" class="form-control" name="img" id="img" style="margin-right:100px;margin-bottom: 20px; width: 470px;" required>
-                <button type="submit" class="btn btn-primary" name="file">Actualizar Foto De Perfil</button>
                 <button type="submit" class="btn btn-primary" name="save">Guardar Imagen</button>
             </div>
         </form>

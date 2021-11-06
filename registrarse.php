@@ -1,15 +1,15 @@
 <?php 
 //validamos que se halla presiondo el boton submit
-if(!empty($_POST) && isset($_REQUEST['link'])){
+session_start();
+if (!empty($_SESSION['active'])) {header('location:index.php');}
+if(!empty($_POST)){
     $alert='';
     //validoamos que todos los campos esten llenos
-    if (empty($_POST['usuario']) | empty($_POST['clave'])  | empty($_POST['email']) | empty($_POST['image'])) {
-        $alert='Todos los campos son obligatirios, Sube una imagen o Copia y pega el link de una imagen';
+    if (empty($_POST['usuario']) | empty($_POST['clave']) | empty($_POST['email'])) {
+        $alert='Todos los campos son obligatirio';
     }else{//si todos los campos esta llenos iniciamos procesio de registro
         //hacemos la coneccion con el server, puedo crear un archivo de conexion.php
-        $conex=mysqli_connect('localhost','root','','danny');
-     
-        
+        $conex=mysqli_connect('localhost','root','','appphp');
         //validamos que se halla hecho la conexion de forma correcta
         if (!$conex) {
             $alert='Error en la conexion con el servidor';
@@ -18,7 +18,6 @@ if(!empty($_POST) && isset($_REQUEST['link'])){
             $email=$_POST['email'];
             //encriptamos la clave o password
             $password=md5($_POST['clave']);
-            $perfil_img=$_POST['image'];
             //creamos consulta para saber si el email o nombre de usuraio esta repetido
             $query_validacion="SELECT * FROM usuarios WHERE user_name='$user_name' OR email='$email'";
             $query=mysqli_query($conex,$query_validacion);
@@ -32,15 +31,15 @@ if(!empty($_POST) && isset($_REQUEST['link'])){
                 $alert='el nombre de usuario o correo ya esta en uso ingrese uno diferente';
             }else{
                 //cramos la consulta para inserter los datos en la tabla si no estan el user_name o email repetidos
-                $insert="INSERT INTO usuarios(user_name,password,perfil_img,email) VALUES('$user_name','$password','$perfil_img','$email')";
+                $insert="INSERT INTO usuarios(user_name,password,email) VALUES('$user_name','$password','$email')";
                 //esta consulta me devuelve un valor falso o verdadero
                 //false si no se pudo hacer,true si se realizo con exito
                 $query_insert=mysqli_query($conex,$insert);
                 if ($query_insert) {
                     //si se realizo con exito la consulta
-                    $alert='Usuario creado o registrado con exito, ya puedes iniciar sesion';
+                    $alert='Usuario registrado con exito';
                 }else{
-                    $alert='error al crear o registrar el usuario';
+                    $alert='Error al crear o registrar el usuario'.mysqli_error($conex);
                 }
             }
 
@@ -48,13 +47,13 @@ if(!empty($_POST) && isset($_REQUEST['link'])){
         }
     }
 }
-if(isset($_REQUEST['file']) && !empty($_POST)) {  //isset($_REQUEST['file']) ES SI SE PULSO EL BOTON CON EL NOMBRE file
+/*if(isset($_REQUEST['file']) && !empty($_POST)) {  //isset($_REQUEST['file']) ES SI SE PULSO EL BOTON CON EL NOMBRE file
     $alert='';
     if (empty($_POST['usuario']) | empty($_POST['clave']) | empty($_POST['email']) | !isset($_FILES['img']['name']) ) {
         $alert='Todos los campos son obligatirios, Sube una imagen o Copia y pega el link de una imagen';
     }else{//si todos los campos esta llenos iniciamos procesio de registro
         //hacemos la coneccion con el server, puedo crear un archivo de conexion.php
-        $conex=mysqli_connect('localhost','root','','danny');
+        $conex=mysqli_connect('localhost','root','','appphp');
         //validamos que se halla hecho la conexion de forma correcta
         if (!$conex) {
             $alert='Error en la conexion con el servidor';
@@ -71,7 +70,7 @@ if(isset($_REQUEST['file']) && !empty($_POST)) {  //isset($_REQUEST['file']) ES 
                 if(in_array($tipoArchivo,$permitidos)){ PARAMETRO 1 DE LA FUNCION IN_ARRAY EL VALOR QUE KEREMOS SABER SI ESTA EN EL ARRAY PARAMETRO 2 ARRAY EN EL QUE SE BUSCARA SI ESTA O NO EL PARAMETRO 1
                 die("ARCHIVO NO PERMITIDO");   SI EL ARCHIVO NO ESTA PERMITIDO MATAMOS TODO PROSECO Y MANDAMOS UN MESAJE
                 }
-                */
+                
                 $nombreArchivo=$_FILES['img']['name']; //NOMBRE ARCHIVO
                 $tamañoArchivo=$_FILES['img']['size']; //TAMAÑO DEL ARCHIVO
                 $imagenSubida=fopen($_FILES['img']['tmp_name'],'r'); //LEEMOS EL ARCHIVO LA 'r' DE SEGUNDO PARAMETRO ES LECTIRA LEER $_FILES ES UNA VARIABLE MEGAGLOBAL DONDE SE GUARDAN LOS ARCHOS DE FORMA TEMPORAL EL PRIMER [NAME DEL CAMPO IMPUT EN EL FORMULARO] EL SEGUDNO [INDICA QUE SE GUARDARA DE FORMA TEMPORAL SIEMPO ES: 'tmp_name']
@@ -92,6 +91,7 @@ if(isset($_REQUEST['file']) && !empty($_POST)) {  //isset($_REQUEST['file']) ES 
                 }else{
                     //cramos la consulta para inserter los datos en la tabla si no estan el user_name o email repetidos
                     $insert="INSERT INTO usuarios(user_name,password,perfil_img,email) VALUES('$user_name','$password','$binariosImagen','$email')";
+                    $insertImg="INSERT INTO imgs(img) VALUES('$binariosImagen')";
                     //esta consulta me devuelve un valor falso o verdadero
                     //false si no se pudo hacer,true si se realizo con exito
                     $query_insert=mysqli_query($conex,$insert);
@@ -109,7 +109,7 @@ if(isset($_REQUEST['file']) && !empty($_POST)) {  //isset($_REQUEST['file']) ES 
 
     }
 }
-}
+}*/
 ?>
 
 <!DOCTYPE html>
@@ -118,9 +118,21 @@ if(isset($_REQUEST['file']) && !empty($_POST)) {  //isset($_REQUEST['file']) ES 
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        function comprobarClaves(){
+            var clave=document.f1.clave.value;
+            var clave2=document.f1.clave2.value;
+            if (clave==clave2){
+                document.f1.submit();
+            }else{
+                alert('Las contraseñas no coinciden');
+            }
+        }
+    </script>
+    <link rel="shortcut icon" href="https://img.icons8.com/color/2x/pictures-folder.png" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <title>INICIAR SECION</title>
+    <title>REGISTRARSE</title>
 </head>
 <body>
     <header>
@@ -129,7 +141,7 @@ if(isset($_REQUEST['file']) && !empty($_POST)) {  //isset($_REQUEST['file']) ES 
     </header>
     <!--si dejo action vacio ejecutara este mismo archivo usamos enctype='multipart/form-data' para poder enviar la imagen 
     a la base de datos-->
-    <form method="post" enctype='multipart/form-data'>
+    <form method="post" enctype='multipart/form-data' name="f1">
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Nombre de usuario</label>
             <input type="text" class="form-control" id="exampleInputEmail1" name="usuario" aria-describedby="emailHelp">
@@ -142,18 +154,14 @@ if(isset($_REQUEST['file']) && !empty($_POST)) {  //isset($_REQUEST['file']) ES 
             <label for="exampleInputPassword1" class="form-label">Contraseña</label>
             <input type="password" class="form-control" name="clave" id="exampleInputPassword1">
         </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Repita la Contraseña</label>
+            <input type="password" class="form-control" name="clave2" id="exampleInputPassword1">
+        </div>
         <!--si alerte esta vacio no imprime nada si tiene algo lo imprime (esto es el operador ternario)-->
         <div>
         <div style="display:inline-block;">
-                <label for="exampleInputPassword1" class="form-label" style="font-size:20px;color:white;">Registrarse Con Imagen De Perfil(Link)</label>
-                <input type="text" class="form-control" name="image" id="image" style="margin-right:100px;margin-bottom: 20px; width: 470px;">
-                <button type="submit" class="btn btn-primary" name="link">Registrarse Con Imagen De Perfil(Link)</button>
-            </div>
-            <div style="display:inline-block;">
-                <label for="exampleInputPassword1" style="font-size:20px;color:white;" class="form-label">Registrarse Con Imagen De Perfil(Archivo)</label>
-                <input type="file" class="form-control" name="img" id="img" style="margin-bottom: 20px; width: 470px;">
-                <button type="submit" class="btn btn-primary" name="file">Registrarse Con Imagen De Perfil(Archivo)</button>
-            </div>
+                <button type="button" class="btn btn-primary" name="link" onclick="comprobarClaves()">Registrarse</button>
         </div>
         <div class="alert"><?php echo isset($alert)?$alert:''; ?></div>
         <button type="reset" onclick="window.location='index.php';" class="btn btn-primary">Iniciar Sesion</button>

@@ -1,11 +1,9 @@
-CREATE DATABASE danny;
+CREATE DATABASE appphp;
 CREATE TABLE usuarios(
     ID int(11) NOT NULL AUTO_INCREMENT,
     user_name varchar(10) NOT NULL,
     password varchar(100) NOT NULL,
-    perfil_img mediumblob NOT NULL,
     email varchar(40) NOT NULL,
-    tipoDeImg varchar(20),
     PRIMARY KEY(ID)
 );
 CREATE TABLE imgs(

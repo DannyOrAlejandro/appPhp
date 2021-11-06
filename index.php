@@ -23,7 +23,7 @@ if (!empty($_SESSION['active'])) {
         }else {
             //si no estan vacios nos conectamos al base datos
             //mysqli_connetc("nombre_del_server","nombre_de_usuario","contraseña";"nombre_base_de_datos");
-            $conex=mysqli_connect('localhost','root','','danny');
+            $conex=mysqli_connect('localhost','root','','appphp');
             if (!$conex) {
                 //si sucede algun error en la coneccion
                 $alert= "Error en la conexion con la base de datos";
@@ -72,13 +72,14 @@ if (!empty($_SESSION['active'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="https://img.icons8.com/color/2x/pictures-folder.png" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>INICIAR SECION</title>
 </head>
 <body>
-    <header>
-        <h1>INICIO DE SESION, PROTYECTO PIA</h1>
+    <header><br><br>
+        <h1>INICIO DE SESION, PROYECTO PIA</h1>
         <h2>Validacion e Inicion de Seccion</h2>
     </header>
     <!--si dejo action vacio ejecutara este mismo archivo-->
