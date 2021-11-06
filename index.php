@@ -96,6 +96,23 @@ if (!empty($_SESSION['active'])) {
         <button type="submit" class="btn btn-primary">Iniciar Sesion</button>
         <button type="reset" onclick="window.location='registrarse.php';" class="btn btn-primary">Registrarse</button>
     </form>
+    <footer class="container">
+        <article class="container-fluid">
+            <div class="mb-3">
+                <h2>INFORMACION DE LA APLICACION</h2>
+                <p class="mx-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio fuga debitis id quaerat consequatur itaque sed temporibus laudantium assumenda quos accusantium ducimus mollitia repellendus, ullam obcaecati recusandae excepturi. Magnam, tempora.</p>
+            </div>
+            <div class="mb-3">
+                <h2>INFORMACION DE LOS DESARROLLADORES</h2>
+                <div class="mx-3">
+                    <a href="https://code.sololearn.com/WgYx7B79upuY/?ref=app" target="_blank"><button type="button" class="btn btn-outline-primary">Michel Andrea</button></a>
+                    <a href="https://code.sololearn.com/WHF9nBFCmrrK" target="_blank"><button type="button" class="btn btn-outline-warning">Danny Alvarez</button></a>
+                    <a href="https://code.sololearn.com/WsCnxHZSUsdD" target="_blank"><button type="button" class="btn btn-outline-info">Pulina Amaya</button></a>
+                    <a href="" target="_blank"><button type="button" class="btn btn-outline-light">Jhon Jairo Correa</button></a>
+                </div>
+            </div>
+        </article>
+    </footer>
     <?php
     //include("mostrar.php");
     ?>
