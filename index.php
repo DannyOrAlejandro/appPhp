@@ -51,7 +51,7 @@ if (!empty($_SESSION['active'])) {
                     $_SESSION['IDuser']=$data['ID'];
                     $_SESSION['user']=$data['user_name'];
                     $_SESSION['contraseña']=$data['password'];
-                    $_SESSION['foto']=$data['perfil_img'];
+                    //$_SESSION['foto']=$data['perfil_img'];
                     //una ves se comprete el proceso le damos acceso al sistema
                     header('location: panelControl.php');
                     

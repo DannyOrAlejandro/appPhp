@@ -119,7 +119,7 @@ include('functions.php');
                 <button type="submit" class="btn btn-primary" name="save">Guardar Imagen</button>
             </div>
         </form>
-        <div style="text-aling:center;"><?php echo $alert; ?></div>
+        <div style="text-aling:center;color:white;text-shadow: 0px 0px 10px black;" class="mb-3"><?php echo $alert; ?></div>
     </div>
     <div style="display:inline-block;"><?php include('mostrar.php');?></div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
