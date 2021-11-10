@@ -104,21 +104,26 @@ include('functions.php');
         <p class="fecha">Colombia, Medellin, <?php echo fecha() ?></p>
         <p class="fecha" style="padding-left:200px;">BIENVENIDO <?php echo $_SESSION['user']; ?></p>
     </header>
-    <div class="forms" style="margin: 100px;">
+    <div class="forms" style="margin:100px;">
         <form action="" method="post" style="display:inline-block;">
             <div style="">
-                <label for="exampleInputPassword1" class="form-label" style="font-size:20px;color:white;">Imagen de perfil(LINK)</label>
+                <label for="exampleInputPassword1" class="form-label" style="font-size:20px;color:white;">Guardar imagen(LINK)</label>
                 <input type="text" class="form-control" name="image" id="image" style="margin-right:100px;margin-bottom: 20px; width: 470px;" required>
                 <button type="submit" class="btn btn-primary" name="link">Guardar imagen</button>
             </div>
         </form>
         <form method="post" enctype='multipart/form-data' style="display:inline-block">
             <div>
-                <label for="exampleInputPassword1" style="font-size:20px;color:white;" class="form-label">Imagen de perfil(ARCHIVO)</label>
+                <label for="exampleInputPassword1" style="font-size:20px;color:white;" class="form-label">Guardar imagen(ARCHIVO)</label>
                 <input type="file" class="form-control" name="img" id="img" style="margin-right:100px;margin-bottom: 20px; width: 470px;" required>
                 <button type="submit" class="btn btn-primary" name="save">Guardar Imagen</button>
             </div>
         </form>
+        <div class="container">
+            <div class="container-fluid">
+                <i><strong><a href="Cpassword.php" target="_blank" style="color:white;">Cambiar contraseña</a></strong></i>
+            </div>
+        </div>
         <div style="text-aling:center;color:white;text-shadow: 0px 0px 10px black;" class="mb-3"><?php echo $alert; ?></div>
     </div>
     <div style="display:inline-block;"><?php include('mostrar.php');?></div>
