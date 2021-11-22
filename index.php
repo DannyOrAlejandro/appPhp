@@ -1,9 +1,8 @@
 <?php
 $alert='';
-//si existe post osea si ya se pulso el boton inisiar sesion
+//si existe post o sea si ya se pulso el boton iniciar sesion
 //empty es si esta vacio, pero al negarlo es si tiene datos
-
-//inicializamos las variables de secion para que me pueda detectar la variable del primer if 
+//inicializamos las variables de sesion para que me pueda detectar la variable del primer if 
 //y a la vez se indica que se inicio o inisiara sesion
 session_start();
 //validamos que ya no se haya iniciado seccion y vemos si hay una seccion activa
@@ -32,7 +31,6 @@ if (!empty($_SESSION['active'])) {
                 //encriptemos las contraseñas con md5 y las escapamos la contraseña y el usuario para evitar inyecciones sql
                 $user= mysqli_real_escape_string($conex,$_POST['usuario']);
                 $password= md5(mysqli_real_escape_string($conex,$_POST['clave']));
-                
                 //creamos las consulta sql
                 $consulta="SELECT * FROM usuarios WHERE user_name='$user' AND password='$password'";
                 $query=mysqli_query($conex,$consulta);
@@ -44,7 +42,6 @@ if (!empty($_SESSION['active'])) {
                     $data=mysqli_fetch_array($query);
                     //print_r($data); con esto si kiero puedo imprimir es array de los datos que me trajo y ver
                     //que puedo acceder a sus datos po medio de la posicion o el nombre de la columna en la base de dato
-
                     //indicamos que se inisio una sesion anteriormente al inicializarlas anteriormente y creamos las variables de sesion
                     //variables de sesion es como desetructurar el array anterior con la informacion del usuario
                     $_SESSION['active']=true;
@@ -54,13 +51,11 @@ if (!empty($_SESSION['active'])) {
                     //$_SESSION['foto']=$data['perfil_img'];
                     //una ves se comprete el proceso le damos acceso al sistema
                     header('location: panelControl.php');
-                    
                 }else{//si es usuario no existe en la base de datos o no se encontro
                     $alert='usuario o clave incorrectas';
                     //destruimos todas las variables de sesion oseas cerramos secion
                     session_destroy();
                 }
-
             }
         }
     }
@@ -79,8 +74,8 @@ if (!empty($_SESSION['active'])) {
 </head>
 <body>
     <header><br><br>
-        <h1>INICIO DE SESION, PROYECTO PIA</h1>
-        <h2>Validacion e Inicion de Seccion</h2>
+        <h1>INICIO DE SESIÓN, PROYECTO PIA</h1>
+        <h2>Validación e Inicio de Sesión</h2>
     </header>
     <!--si dejo action vacio ejecutara este mismo archivo-->
     <form action="" method="post">
@@ -93,29 +88,26 @@ if (!empty($_SESSION['active'])) {
         <input type="password" class="form-control" name="clave" id="exampleInputPassword1">
     </div><!--si alerte esta vacio no imprime nada si tiene algo lo imprime (esto es el operador ternario)-->
     <div class="alert"><?php echo isset($alert)?$alert:''; ?></div>
-        <button type="submit" class="btn btn-primary">Iniciar Sesion</button>
+        <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
         <button type="reset" onclick="window.location='registrarse.php';" class="btn btn-primary">Registrarse</button>
     </form>
     <footer class="container">
         <article class="container-fluid">
             <div class="mb-3">
-                <h2>INFORMACION DE LA APLICACION</h2>
-                <p class="mx-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio fuga debitis id quaerat consequatur itaque sed temporibus laudantium assumenda quos accusantium ducimus mollitia repellendus, ullam obcaecati recusandae excepturi. Magnam, tempora.</p>
+                <h2>INFORMACIÓN DE LA APLICACIÓN</h2>
+                <p class="mx-3"><i>Galeria de imágenes creada por los desarrolladores citados en la parte inferior de la página. </i></p>
             </div>
             <div class="mb-3">
-                <h2>INFORMACION DE LOS DESARROLLADORES</h2>
+                <h2>INFORMACIÓN DE LOS DESARROLLADORES</h2>
                 <div class="mx-3">
-                    <a href="https://code.sololearn.com/WgYx7B79upuY/?ref=app" target="_blank"><button type="button" class="btn btn-outline-primary">Michel Andrea</button></a>
-                    <a href="https://code.sololearn.com/WHF9nBFCmrrK" target="_blank"><button type="button" class="btn btn-outline-warning">Danny Alvarez</button></a>
-                    <a href="https://code.sololearn.com/WsCnxHZSUsdD" target="_blank"><button type="button" class="btn btn-outline-info">Pulina Amaya</button></a>
-                    <a href="" target="_blank"><button type="button" class="btn btn-outline-light">Jhon Jairo Correa</button></a>
+                    <a href="https://code.sololearn.com/WgYx7B79upuY/?ref=app" target="_blank"><button type="button" class="btn btn-outline-primary">Michel Andrea Álvarez</button></a>
+                    <a href="https://code.sololearn.com/WHF9nBFCmrrK" target="_blank"><button type="button" class="btn btn-outline-warning">Danny Alejadro Álvarez</button></a>
+                    <a href="https://code.sololearn.com/WsCnxHZSUsdD" target="_blank"><button type="button" class="btn btn-outline-info">Maria Paulina Ospina</button></a>
+                    <a href="perfil/perfil.html" target="_blank"><button type="button" class="btn btn-outline-light">Jhon Jairo Correa</button></a>
                 </div>
             </div>
         </article>
     </footer>
-    <?php
-    //include("mostrar.php");
-    ?>
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>

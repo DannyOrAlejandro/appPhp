@@ -5,7 +5,7 @@ if (!empty($_SESSION['active'])) {header('location:index.php');}
 if(!empty($_POST)){
     $alert='';
     //validoamos que todos los campos esten llenos
-    if (empty($_POST['usuario']) | empty($_POST['clave']) | empty($_POST['email'])) {
+    if (empty($_POST['usuario']) | empty($_POST['clave']) | empty($_POST['email']) | empty($_POST['number'])) {
         $alert='Todos los campos son obligatirio';
     }else{//si todos los campos esta llenos iniciamos procesio de registro
         //hacemos la coneccion con el server, puedo crear un archivo de conexion.php
@@ -16,6 +16,7 @@ if(!empty($_POST)){
         }else{
             $user_name=$_POST['usuario'];
             $email=$_POST['email'];
+            $number=$_POST['number'];
             //encriptamos la clave o password
             $password=md5($_POST['clave']);
             //creamos consulta para saber si el email o nombre de usuraio esta repetido
@@ -31,13 +32,13 @@ if(!empty($_POST)){
                 $alert='el nombre de usuario o correo ya esta en uso ingrese uno diferente';
             }else{
                 //cramos la consulta para inserter los datos en la tabla si no estan el user_name o email repetidos
-                $insert="INSERT INTO usuarios(user_name,password,email) VALUES('$user_name','$password','$email')";
+                $insert="INSERT INTO usuarios(user_name,email,number,password) VALUES('$user_name','$email','$number','$password')";
                 //esta consulta me devuelve un valor falso o verdadero
                 //false si no se pudo hacer,true si se realizo con exito
                 $query_insert=mysqli_query($conex,$insert);
                 if ($query_insert) {
                     //si se realizo con exito la consulta
-                    $alert='Usuario registrado con exito';
+                    $alert='Usuario registrado con exito, Ya puedes iniciar sesión';
                 }else{
                     $alert='Error al crear o registrar el usuario'.mysqli_error($conex);
                 }
@@ -149,6 +150,10 @@ if(!empty($_POST)){
         <div class="mb-3" id="perfilImg">
             <label for="email" class="form-label">Correo Electronico</label>
             <input type="email" class="form-control" name="email" id="email">
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Telefono</label>
+            <input type="number" class="form-control" name="number" id="number">
         </div>
         <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label">Contraseña</label>

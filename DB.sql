@@ -1,9 +1,10 @@
 CREATE DATABASE appphp;
 CREATE TABLE usuarios(
     ID int(11) NOT NULL AUTO_INCREMENT,
-    user_name varchar(10) NOT NULL,
-    password varchar(100) NOT NULL,
+    user_name varchar(30) NOT NULL,
     email varchar(40) NOT NULL,
+    number varchar(12) NOT NULL,
+    password varchar(100) NOT NULL,
     PRIMARY KEY(ID)
 );
 CREATE TABLE imgs(
