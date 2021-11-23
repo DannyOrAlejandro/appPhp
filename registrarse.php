@@ -137,8 +137,8 @@ if(!empty($_POST)){
 </head>
 <body>
     <header>
-        <h1>registrarse en el sitema</h1>
-        <h2>Validacion y registro</h2>
+        <h1>Registrarse En El Sistema</h1>
+        <h2>Validacion y Registro De Datos</h2>
     </header>
     <!--si dejo action vacio ejecutara este mismo archivo usamos enctype='multipart/form-data' para poder enviar la imagen 
     a la base de datos-->
