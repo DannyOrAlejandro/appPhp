@@ -22,13 +22,13 @@ if(empty($_POST['email'])){
 <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Cambiar email</h5>
+        <h5 class="modal-title" id="staticBackdropLabel">Cambiar correo electronico</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
       <form action="" method="post">
           <div class="mb-3">
-            <label for="recipient-name" class="col-form-label">NUEVO CORREO ELECTROINCO</label>
+            <label for="recipient-name" class="col-form-label">NUEVO CORREO ELECTRONICO</label>
             <input type="text" class="form-control" id="recipient-name" name="email">
           </div>
           <div class="modal-footer">

@@ -74,7 +74,7 @@ if (!empty($_SESSION['active'])) {
 </head>
 <body>
     <header><br><br>
-        <h1>INICIO DE SESIÓN, PROYECTO PIA</h1>
+        <h1>INICIO DE SESIÓN, StorageOfImg</h1>
         <h2>Validación e Inicio de Sesión</h2>
     </header>
     <!--si dejo action vacio ejecutara este mismo archivo-->

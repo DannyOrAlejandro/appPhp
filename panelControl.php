@@ -4,8 +4,7 @@
 //si no estan creadas no puedo acceder al sistema, entoces validamos que exista una seccion para poder entrar al sistema
 //si no existe no se puede entrar nos redirecciona al formulario de inicio de secion
 session_start();
-$ID=$_SESSION['IDuser'];
-if (empty($_SESSION['active'])) {header('location:index.php');}
+if(empty($_SESSION['active'])){header('location:index.php');}
 $alert='';
 include('DB.php');
 if(!$conex){
@@ -50,7 +49,7 @@ if(!$conex){
     }else {
         $alert='Error en la conexion con el servidor';
     }
-}*/
+}*/ $ID=$_SESSION['IDuser'];
     if (isset($_REQUEST['save'])){
         if (isset($_FILES['img']['name'])) {
             $tipoArchivo=$_FILES['img']['type'];
